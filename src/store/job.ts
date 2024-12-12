@@ -1,15 +1,15 @@
 import {defineStore} from "pinia";
 import {job2G6TreeGraph, jobLeafNode2G6Graph} from "@/utils/graphUtil.ts";
 import {computed, ref} from "vue";
-import {fetchSimpleJob} from "@/api";
+import {fetchSimpleJob,fetchLevelJob} from "@/api";
 import {Response, Task} from "@/type.ts";
 
 export const useJobStore = defineStore("job", () => {
   let _job = ref<Task>();
 
   async function updateData(question: string) {
-    const res = (await fetchSimpleJob(`{ "task": "${question}" }`)).data as Response<any>;
-    // const res = (await fetchLevelJob(`{ "task": "${question}" }`)).data as Response<any>;
+    //const res = (await fetchSimpleJob(`{ "task": "${question}" }`)).data as Response<any>;
+    const res = (await fetchLevelJob(`{ "task": "${question}" }`)).data as Response<any>;
     console.debug("res", res);
     _job.value = convertData(res.data);
 
