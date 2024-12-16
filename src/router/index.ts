@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { default as WorkflowIndex } from "@/pages/Workflow/index.vue";
+import Workflow from "@/pages/Workflow/index.vue";
 // import { default as ChatIndex } from "@/pages/Chat/index.vue";
-import Home from "@/pages/Home.vue";
+import Home from "@/pages/Home/index.vue"
 
 const routes: RouteRecordRaw[] = [
   { path: "/", component: Home },
-  { path: "/workflow", component: WorkflowIndex },
+  { path: "/workflow", component: Workflow },
   // { path: "/chat", component: ChatIndex },
 ];
 
