@@ -10,4 +10,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        // 配置全局 Less 变量
+        additionalData: `@import "@/style.less";`
+      }
+    }
+  }
 });
