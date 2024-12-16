@@ -1,0 +1,32 @@
+[
+  {
+    "questionId": "gis-001",
+    "title": "西湖景区旅游资源评价",
+    "type": "chat",
+    "content": "如何使用GIS技术对杭州西湖景区的旅游资源进行综合评价，包括自然景观和文化遗迹的分布分析？"
+  },
+  {
+    "questionId": "gis-002",
+    "title": "城市交通流量分析",
+    "type": "chat",
+    "content": "在上海市，如何利用GIS系统分析城市交通流量数据，以优化交通信号灯的设置？"
+  },
+  {
+    "questionId": "gis-003",
+    "title": "ArcGIS分析工具故障排除",
+    "type": "chat",
+    "content": "在使用ArcGIS进行北京城市规划项目时，分析工具突然不可用，应如何排查并解决这一问题？"
+  },
+  {
+    "questionId": "gis-004",
+    "title": "黄山旅游线路设计",
+    "type": "chat",
+    "content": "如何利用GIS技术为黄山风景区设计最佳旅游线路，以提高游客体验并减少环境影响？"
+  },
+  {
+    "questionId": "gis-005",
+    "title": "处理GIS数据质量问题",
+    "type": "chat",
+    "content": "在进行长江流域环境监测项目时，发现GIS数据来源不明且精度不足，有哪些具体的方法可以处理这些问题？"
+  }
+]
