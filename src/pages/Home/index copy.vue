@@ -5,12 +5,8 @@ import Case from "@/components/Case.vue";
 
 <template>
   <div id="container">
-    <el-image
-      src="http://8.217.104.137:39999/_next/image?url=%2Flogo-light.png&w=640&q=75"
-      mode="fit"
-      style="position: absolute; top: 35px; right: 35px; height: 35px"
-    />
-    <div class="title">AI GIS SYSTEM</div>
+
+    <img src="@/assets/icons/Logo.svg" alt="AI GIS STSTEM">
     <div class="content">
       <Question />
       <div class="cases">
@@ -22,10 +18,12 @@ import Case from "@/components/Case.vue";
 
 <style scoped lang="less">
 @import "@/style.less";
+
 #container {
   height: 100vh;
   background: @bg-color;
   text-align: center;
+
   .title {
     padding-top: calc(23% - 50px);
     font-size: 50px;
@@ -35,6 +33,7 @@ import Case from "@/components/Case.vue";
     font-family: sans-serif;
     text-shadow: 3px 2px rgba(darkblue, 0.3);
   }
+
   .content {
     display: flex;
     flex-direction: column;
@@ -42,6 +41,7 @@ import Case from "@/components/Case.vue";
     align-items: center;
     width: 70%;
     margin: 80px auto auto;
+
     .cases {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
