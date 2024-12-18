@@ -4,7 +4,7 @@ import Toollist from "@/components/Toollist/index.vue";
 
 <template>
   <div class="main-container">
-    <div class="chat-container">
+    <div class="dialog-container">
       <RouterView v-slot="{ Component }">
         <Transition name="fade">
           <Component :is="Component" />
@@ -20,8 +20,6 @@ import Toollist from "@/components/Toollist/index.vue";
 
 <style lang="less" scoped>
 .main-container {
-  /* 禁用滑动选取 */
-  user-select: none;
   position: absolute;
   top: 0;
   right: 0;
@@ -32,11 +30,12 @@ import Toollist from "@/components/Toollist/index.vue";
   width: 100%;
   background-color: @bg-color;
 
-  .chat-container {
+  .dialog-container {
+    position: relative;
     width: 100%;
     flex: 2;
     max-width: 800px;
-    margin: 1rem;
+    margin: 0 1rem;
   }
 
   .workspace-container {

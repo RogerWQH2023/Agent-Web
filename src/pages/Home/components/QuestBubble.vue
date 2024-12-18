@@ -1,17 +1,13 @@
-<script setup>
+<script setup lang="ts">
+import type { AgentType } from '@/types/index.d.ts'
 import { defineProps } from 'vue';
 import { modeData } from '@/constant/modeData'
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-});
+
+const props = defineProps<{
+  title: string,
+  type: AgentType
+}>();
 
 </script>
 

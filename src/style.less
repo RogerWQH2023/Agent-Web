@@ -1,26 +1,33 @@
-@bg-color: #F5F5F5;
-@main-color: #2D65F7;
+@bg-color: #f5f5f5;
+@main-color: #2d65f7;
+@workflow-color: #e0620d;
 
 html,
 body {
   margin: 0;
   height: 100%;
   background-color: @bg-color;
+  -webkit-user-select: none; /* 禁用滑动选取，支持Safari */
   user-select: none; /* 禁用滑动选取 */
-  -webkit-tap-highlight-color:transparent; /* 禁用手机端点击高亮 */
-  font-size:16px; /* 设置全局字体大小 */
-  @media (max-width: 600px) {font-size: 14px;}
+  -webkit-tap-highlight-color: transparent; /* 禁用手机端点击高亮 */
+  font-size: 16px; /* 设置全局字体大小 */
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-.fade-enter, .fade-leave-to {
-  opacity: 0
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
-.fade-leave, .fade-enter-to {
-  opacity: 1
+.fade-leave,
+.fade-enter-to {
+  opacity: 1;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: all .2s
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s;
 }
