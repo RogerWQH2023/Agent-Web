@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { getOptionalQuestions } from "@/api/chat"
-import InputBox from "@/components/InputBox/index.vue"
+import MainInputBox from "@/components/MainInputBox/index.vue"
+import type { AgentType } from "@/types/index.d.ts"
 import QuestBubble from "./components/QuestBubble.vue"
+import type { API } from "@/api/typing.d.ts"
 
 const queryResult = ref<API.OptionalQuestionsResponse>();
+const InputBoxRef = ref<InstanceType<typeof MainInputBox> | null>();
 
 
 // 在组件加载时执行的操作
@@ -16,7 +19,12 @@ onMounted(() => {
 const updateOptionalQuestions = async () => {
   const response = await getOptionalQuestions();
   queryResult.value = response;
-  console.log(response);
+}
+
+const setBoxContent = (mode: AgentType, content: string) => {
+  if (InputBoxRef.value) {
+    InputBoxRef.value.setContent(mode, content);
+  }
 }
 
 </script>
@@ -24,10 +32,10 @@ const updateOptionalQuestions = async () => {
 <template>
   <div id="container">
     <img class="title-icon" src="@/assets/icons/Logo-words.svg" alt="AI GIS STSTEM">
-    <InputBox class="inputbox" style="margin-bottom: 40px;" />
+    <MainInputBox class="inputbox" style="margin-bottom: 40px;" ref="InputBoxRef" />
     <div class="bubble-container">
       <QuestBubble v-if="queryResult !== undefined" v-for="item in queryResult.data" :key="item.questionId"
-        :title="item.title" :type="item.type" />
+        :title="item.title" :type="item.type" @click="setBoxContent(item.type, item.content)" />
     </div>
   </div>
 

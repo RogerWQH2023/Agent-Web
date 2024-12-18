@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps } from 'vue';
+import { modeData } from '@/constant/modeData'
 
 const props = defineProps({
   title: {
@@ -12,16 +13,13 @@ const props = defineProps({
   },
 });
 
-const handleClick = () => {
-  // 处理点击事件
-  console.log('Bubble clicked:', props.title);
-};
 </script>
 
 <template>
   <div style="display: inline-block">
-    <div class="bubble" @click="handleClick">
-      <img src="@/assets/icons/Dialog.svg" class="icon" />
+    <div class="bubble">
+      <img v-if="props.type === 'chat'" :src="modeData['chat'].iconUrl" class="icon" />
+      <img v-if="props.type === 'workflow'" :src="modeData['workflow'].iconUrl" class="icon" />
       <span class="title">{{ title }}</span>
     </div>
   </div>
