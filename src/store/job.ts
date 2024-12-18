@@ -1,8 +1,8 @@
-import {defineStore} from "pinia";
-import {job2G6TreeGraph, jobLeafNode2G6Graph} from "@/utils/graphUtil.ts";
-import {computed, ref} from "vue";
-import {fetchSimpleJob,fetchLevelJob} from "@/api";
-import {Response, Task} from "@/type.ts";
+import { defineStore } from "pinia";
+import { job2G6TreeGraph, jobLeafNode2G6Graph } from "@/utils/graphUtil.ts";
+import { computed, ref } from "vue";
+import { fetchLevelJob } from "@/api";
+import { Response, Task } from "@/type.ts";
 
 export const useJobStore = defineStore("job", () => {
   let _job = ref<Task>();
