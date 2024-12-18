@@ -1,3 +1,5 @@
+import type { AgentType } from "@/types/index.d.ts";
+
 declare namespace API {
   // 历史记录查询返回体
   interface HistoryListResponse {
@@ -18,7 +20,7 @@ declare namespace API {
     data: Array<{
       questionId: string,
       title: string,
-      type:"chat"|"workflow",
+      type: AgentType,
       content: string
     }>;
   }
@@ -46,4 +48,4 @@ declare namespace API {
     msg: string;
     data: DialogData;
   }
-}
+};
