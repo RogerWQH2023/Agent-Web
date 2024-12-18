@@ -3,8 +3,8 @@ import axios from "axios";
 
 const fetchMockData = async (url: string) => {
   try {
-    // 添加1秒的延迟
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    // 添加1/4秒的读数据延迟
+    await new Promise((resolve) => setTimeout(resolve, 250));
     //进行请求
     const response = await axios.get(url);
     return response.data;
