@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { mockGetNewDialogId } from "@/api/chat.ts"
 import type { AgentType } from "@/types/index.d.ts"
 import ModeSelector from "./ModeSelectorButton.vue"
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 
+const isSending = ref<boolean>(false); // 添加一个标志变量
 const inputBox = ref<HTMLTextAreaElement | null>(); // 定义输入框的响应式数据
 const inputMode = ref<AgentType>("chat");
 const updateMode = (mode: AgentType) => {
@@ -11,11 +15,17 @@ const updateMode = (mode: AgentType) => {
 }
 
 
-const handleSend = () => {
+const handleSend = async () => {
+  if (isSending.value) { return; }
   if (inputBox.value && inputBox.value.value !== '') {
-    console.log("发送内容:", inputBox.value.value);
+    isSending.value = true;
+    const dialogId = await mockGetNewDialogId(inputMode.value, inputBox.value.value);
+    isSending.value = false;
+    router.push(`/dialog/${inputMode.value}/${dialogId}`);
+
+    //console.log("发送内容:", inputBox.value.value);
     // 清空输入框
-    inputBox.value.value = '';
+    //inputBox.value.value = '';
   }
 };
 
@@ -42,7 +52,6 @@ defineExpose<{
       <div class="send-container" title="发送" @click="handleSend">
         <img src="@/assets/icons/Send_line.svg">
       </div>
-
     </div>
   </div>
 </template>
@@ -63,7 +72,6 @@ defineExpose<{
   align-items: center;
   /* 垂直居中 */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(20px);
 
   &.chat {
     transition: 0.25s;

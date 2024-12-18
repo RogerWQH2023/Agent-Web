@@ -1,34 +1,50 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { AgentType } from "@/types/index.d.ts"
-import ModeSelector from "./ModeSelectorButton.vue"
+import { modeData } from "@/constant/modeData.ts"
+
+const props = defineProps<{
+  type: AgentType
+}>()
 
 
 const inputBox = ref<HTMLTextAreaElement | null>(); // 定义输入框的响应式数据
-const inputMode = ref<AgentType>("chat");
-const updateMode = (mode: AgentType) => {
-  inputMode.value = mode;
-}
 
 
 const handleSend = () => {
-  if (inputBox.value && inputBox.value.value !== '') {
-    console.log("发送内容:", inputBox.value.value);
+  if (inputBox.value!.value !== '') {
+    console.log("发送内容:", inputBox.value!.value);
     // 清空输入框
-    inputBox.value.value = '';
+    inputBox.value!.value = '';
   }
 };
+const getContent = () => {
+  return inputBox.value!.value;
+}
+const clearContent = () => {
+  //清除内容
+  inputBox.value!.value = '';
+}
+defineExpose<{
+  getContent: () => string; // 定义 childMethod 的类型
+  clearContent: () => void;//清除对话框内容
+}>({
+  getContent,
+  clearContent
+});
+
+
 
 
 </script>
 
 <template>
-  <div class="input-box-container" :class="{ chat: inputMode === 'chat', workflow: inputMode === 'workflow' }">
+  <div class="input-box-container" :class="{ chat: props.type === 'chat', workflow: props.type === 'workflow' }">
     <textarea ref="inputBox" class="input-box" placeholder="请输入您的问题~"></textarea>
     <div class="button-container">
       <div class="mode-container">
         <div class="icon-container">
-          <img :src="modeData[inputMode].iconUrl" />
+          <img :src="modeData[props.type].iconUrl" />
         </div>
       </div>
       <div class="send-container" title="发送" @click="handleSend">

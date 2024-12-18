@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from "vue"
+import { ref } from "vue"
 import type { AgentType } from "@/types/index.d.ts"
 import { modeData } from "@/constant/modeData.ts"
 import ModeCard from "./ModeCard.vue"
