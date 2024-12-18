@@ -40,9 +40,6 @@ const closeAllTools = () => {
         <div class="icon-container" title="历史会话" @click="toggleHistoryList">
           <img src="@/assets/icons/History_line.svg" alt="新会话">
         </div>
-        <div class="icon-container" title="更多工具">
-          <img src="@/assets/icons/More_line.svg" alt="新会话">
-        </div>
         <div class="icon-container" title="用户">
           <img src="@/assets/icons/User_line.svg" alt="新会话">
         </div>
@@ -145,8 +142,6 @@ const closeAllTools = () => {
 }
 
 .expand-button-container {
-  width: 3rem;
-  height: 5rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
