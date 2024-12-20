@@ -29,6 +29,21 @@ const handleSend = async () => {
   }
 };
 
+// 处理键盘按下事件
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // 防止换行
+    if (event.ctrlKey) {
+      // 如果同时按下 Ctrl + Enter，允许换行
+      inputBox.value!.value += "\n";
+    } else {
+      // 如果只按下 Enter，发送消息
+
+      handleSend(); // 调用发送函数
+    }
+  }
+};
+
 const setContent = (mode: AgentType, content: string) => {
   if (inputBox.value) {
     inputMode.value = mode;
@@ -46,7 +61,7 @@ defineExpose<{
 
 <template>
   <div class="input-box-container" :class="{ chat: inputMode === 'chat', workflow: inputMode === 'workflow' }">
-    <textarea ref="inputBox" class="input-box" placeholder="请输入您的问题~"></textarea>
+    <textarea ref="inputBox" class="input-box" placeholder="请输入您的问题~" @keydown="handleKeydown"></textarea>
     <div class="button-container">
       <ModeSelector :mode="inputMode" @updateMode="updateMode" />
       <div class="send-container" title="发送" @click="handleSend">

@@ -2,9 +2,12 @@
 import { ref } from 'vue';
 import type { AgentType } from "@/types/index.d.ts"
 import { modeData } from "@/constant/modeData.ts"
+import { valueEquals } from 'element-plus';
+
 
 const props = defineProps<{
-  type: AgentType
+  type: AgentType,
+  inputOnClicked: (content: string) => void
 }>()
 
 
@@ -13,11 +16,27 @@ const inputBox = ref<HTMLTextAreaElement | null>(); // 定义输入框的响应�
 
 const handleSend = () => {
   if (inputBox.value!.value !== '') {
-    console.log("发送内容:", inputBox.value!.value);
+    props.inputOnClicked(inputBox.value!.value);
     // 清空输入框
     inputBox.value!.value = '';
   }
 };
+
+// 处理键盘按下事件
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // 防止换行
+    if (event.ctrlKey) {
+      // 如果同时按下 Ctrl + Enter，允许换行
+      inputBox.value!.value += "\n";
+    } else {
+      // 如果只按下 Enter，发送消息
+
+      handleSend(); // 调用发送函数
+    }
+  }
+};
+
 const getContent = () => {
   return inputBox.value!.value;
 }
@@ -40,7 +59,7 @@ defineExpose<{
 
 <template>
   <div class="input-box-container" :class="{ chat: props.type === 'chat', workflow: props.type === 'workflow' }">
-    <textarea ref="inputBox" class="input-box" placeholder="请输入您的问题~"></textarea>
+    <textarea ref="inputBox" class="input-box" placeholder="请输入您的问题~" @keydown="handleKeydown"></textarea>
     <div class="button-container">
       <div class="mode-container">
         <div class="icon-container">
@@ -74,12 +93,12 @@ defineExpose<{
 
   &.chat {
     transition: 0.25s;
-    background-color: #eaf2ff80;
+    background-color: #eaf2ff;
   }
 
   &.workflow {
     transition: 0.25s;
-    background-color: #fff0e580;
+    background-color: #fff0e5;
   }
 
   .input-box {
