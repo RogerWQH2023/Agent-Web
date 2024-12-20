@@ -1,5 +1,6 @@
 import { mockSearchDialogDataById, mockSearchHistoryList, mockSearchOptionalQuestions } from "./mock/api.mock";
 import type { AgentType } from '@/types/index.d.ts'
+import { API } from "./typing";
 
 /* Mock apis */
 // 获取历史记录列表，目前为mock数据
@@ -22,10 +23,20 @@ export async function getDialogDataById(dialogId: string) {
 export async function mockGetNewDialogId(type: AgentType, question: string) {
   // 添加1/4秒的读数据延迟
   await new Promise((resolve) => setTimeout(resolve, 250));
-  const message: Array = [{ role: "user", content: question }]
+  const message = {
+    type: "openai",
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: question }]
+  };
   localStorage.setItem("tempType", type);
   localStorage.setItem("tempMessage", JSON.stringify(message));
-  console.log(localStorage.getItem("tempType"));
-  console.log(localStorage.getItem("tempMessage"));
   return "demo-id-zju24";
+}
+
+/* 新建对话的mock逻辑，发送问题，返回新的回答 */
+export async function mockGetNewMessage(requestParam: API.GISQAChatRequest) {
+  // 添加1秒的读数据延迟
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  requestParam.messages.push({ role: "assistant", content: "Roger That!" });
+  return requestParam;
 }

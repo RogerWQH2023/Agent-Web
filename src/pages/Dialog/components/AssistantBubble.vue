@@ -2,7 +2,6 @@
 import { AgentType } from '@/types';
 
 const props = defineProps<{
-  content: string,
   type: AgentType
 }>();
 </script>
@@ -18,7 +17,9 @@ const props = defineProps<{
           p-id="7727"></path>
       </svg>
     </div>
-    <div class="content-container" v-html="props.content">
+    <div class="content-container">
+      <!-- 插入子组件的位置 -->
+      <slot></slot>
     </div>
   </div>
 </template>

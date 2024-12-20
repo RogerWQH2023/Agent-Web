@@ -48,4 +48,15 @@ declare namespace API {
     msg: string;
     data: DialogData;
   }
+
+  interface GISQAChatMessage {
+    role: "user" | "assistant",
+    content: string
+  }
+  interface GISQAChatRequest {
+    type: string,
+    model: string,
+    messages: Array<GISQAChatMessage>
+
+  }
 };
