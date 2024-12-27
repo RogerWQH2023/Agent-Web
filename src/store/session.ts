@@ -26,7 +26,7 @@ export const useSessionStore = defineStore("session", () => {
   async function chatted() {
     loading.value = true;
     await jobStore.updateData(session.question);
-    await router.push("/workflow");
+    //await router.push("/workflow");
     graphShow.value = true;
     loading.value = false;
   }
