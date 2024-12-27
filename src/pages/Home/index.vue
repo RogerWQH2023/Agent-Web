@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { getOptionalQuestions } from "@/api/chat"
+import { mockGetOptionalQuestions } from "@/api/chat"
 import MainInputBox from "@/components/MainInputBox/index.vue"
 import type { AgentType } from "@/types/index.d.ts"
 import QuestBubble from "./components/QuestBubble.vue"
 import type { API } from "@/api/typing.d.ts"
+import { usePlaygroundStore } from '@/store/playground';
+import { storeToRefs } from 'pinia';
 
 const queryResult = ref<API.OptionalQuestionsResponse>();
 const InputBoxRef = ref<InstanceType<typeof MainInputBox> | null>();
@@ -12,12 +14,15 @@ const InputBoxRef = ref<InstanceType<typeof MainInputBox> | null>();
 
 // 在组件加载时执行的操作
 onMounted(() => {
+  const playgroundStore = usePlaygroundStore()
+  const { expand, content } = storeToRefs(playgroundStore);
+  expand.value = false;
   queryResult.value = undefined;
   updateOptionalQuestions();
 });
 
 const updateOptionalQuestions = async () => {
-  const response = await getOptionalQuestions();
+  const response = await mockGetOptionalQuestions();
   queryResult.value = response;
 }
 
@@ -38,7 +43,6 @@ const setBoxContent = (mode: AgentType, content: string) => {
         :title="item.title" :type="item.type" @click="setBoxContent(item.type, item.content)" />
     </div>
   </div>
-
 </template>
 
 <style scoped lang="less">
