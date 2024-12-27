@@ -81,12 +81,12 @@ defineExpose<{
   background-color: #ffffff80;
   border-radius: 15px;
   display: flex;
-  /* 使用flexbox布局 */
   justify-content: space-between;
-  /* 水平居中 */
   align-items: center;
-  /* 垂直居中 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.2);
+
+  &:focus-within {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.2);
+  }
 
   &.chat {
     transition: 0.25s;

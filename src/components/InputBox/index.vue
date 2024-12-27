@@ -2,23 +2,26 @@
 import { ref } from 'vue';
 import type { AgentType } from "@/types/index.d.ts"
 import { modeData } from "@/constant/modeData.ts"
-import { valueEquals } from 'element-plus';
 
 
 const props = defineProps<{
   type: AgentType,
-  inputOnClicked: (content: string) => void
+  inputOnClicked: (content: string) => Promise<void>
 }>()
+const isSending = ref<boolean>(false);
 
 
 const inputBox = ref<HTMLTextAreaElement | null>(); // 定义输入框的响应式数据
 
 
-const handleSend = () => {
-  if (inputBox.value!.value !== '') {
-    props.inputOnClicked(inputBox.value!.value);
+const handleSend = async () => {
+  if (!isSending.value && inputBox.value!.value !== '') {
     // 清空输入框
+    const content = inputBox.value!.value;
     inputBox.value!.value = '';
+    isSending.value = true;
+    await props.inputOnClicked(content);
+    isSending.value = false;
   }
 };
 
@@ -30,8 +33,6 @@ const handleKeydown = (event: KeyboardEvent) => {
       // 如果同时按下 Ctrl + Enter，允许换行
       inputBox.value!.value += "\n";
     } else {
-      // 如果只按下 Enter，发送消息
-
       handleSend(); // 调用发送函数
     }
   }
@@ -88,8 +89,11 @@ defineExpose<{
   /* 水平居中 */
   align-items: center;
   /* 垂直居中 */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(20px);
+
+  &:focus-within {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 0 8px rgba(0, 0, 0, 0.2);
+  }
 
   &.chat {
     transition: 0.25s;
