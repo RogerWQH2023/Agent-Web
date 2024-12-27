@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { AgentType } from '@/types';
 
+/* 气泡类别有额外的loading和error类型 */
 const props = defineProps<{
-  type: AgentType
+  type: AgentType | 'loading' | 'error'
 }>();
 </script>
 
 <template>
   <div class="bubble-container">
-    <div class="role-container" :class="{ chat: props.type === 'chat', workflow: props.type === 'workflow' }">
+    <div class="role-container"
+      :class="{ chat: props.type === 'chat', workflow: props.type === 'workflow', loading: props.type === 'loading', error: props.type === 'error' }">
       <!-- 内联svg，用于动态修改颜色和做动画 -->
       <svg t="1734507548852" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
         p-id="7726" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128">
@@ -17,7 +19,8 @@ const props = defineProps<{
           p-id="7727"></path>
       </svg>
     </div>
-    <div class="content-container">
+    <div class="content-container"
+      :class="{ workflow: props.type === 'workflow', loading: props.type === 'loading', error: props.type === 'error' }">
       <!-- 插入子组件的位置 -->
       <slot></slot>
     </div>
@@ -56,10 +59,21 @@ const props = defineProps<{
         fill: @workflow-color;
       }
     }
+
+    &.loading {
+      svg {
+        fill: #767676;
+      }
+    }
+
+    &.error {
+      svg {
+        fill: #b70000;
+      }
+    }
   }
 
   .content-container {
-    flex: auto;
     margin: 0.2rem;
     padding: 0.8rem;
     background-color: #ffffff;
@@ -67,6 +81,7 @@ const props = defineProps<{
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     white-space: pre-wrap; //识别换行
     hyphens: auto;
+    overflow: hidden;
 
     user-select: text;
     -webkit-user-select: text;
@@ -77,21 +92,70 @@ const props = defineProps<{
     line-height: 1.5rem;
     font-size: 1rem;
 
-    /* 动画 */
-    animation: slideInFromLeft 0.5s ease-out;
+    &.workflow {
+      flex: auto;
+    }
 
-    @keyframes slideInFromLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-0.5rem);
-      }
+    &.loading {
+      background-color: #767676;
+      color: #d3d3d3;
 
-      to {
-        opacity: 1;
-        transform: translateX(0);
+      &::after {
+        content: '';
+        display: inline;
+        color: #d3d3d3;
+        font-size: 1.5rem; // 可以根据需要调整大小
+        animation: dots 3s infinite;
       }
     }
 
+    &.error {
+      background-color: #b70000;
+      color: white;
+    }
+
+    /* 动画 */
+    animation: slideInFromLeft 0.5s ease-out;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dots {
+
+  0% {
+    content: '';
+  }
+
+  16.7% {
+    content: '.';
+  }
+
+
+  33.3% {
+    content: '..';
+  }
+
+  50% {
+    content: '...';
+  }
+
+  66.7% {
+    content: '....';
+  }
+
+  83.3% {
+    content: '.....';
   }
 }
 </style>

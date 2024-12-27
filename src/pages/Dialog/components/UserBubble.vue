@@ -43,7 +43,7 @@ const props = defineProps<{
   }
 
   .content-container {
-    flex: auto;
+    //flex: auto;
     margin: 0.2rem;
     padding: 0.8rem;
     border-radius: 15px;
