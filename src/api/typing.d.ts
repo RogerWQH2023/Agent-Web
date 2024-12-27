@@ -57,6 +57,21 @@ declare namespace API {
     type: string,
     model: string,
     messages: Array<GISQAChatMessage>
-
+  }
+  interface GISQAChatResponse {
+    errcode: number,
+    errmsg: string,
+    messages: Array<GISQAChatMessage>
+  }
+  interface Task {
+    task: string;
+    toolId: string;
+    toolName: string;
+    subtasks: Array<Task>;
+  }
+  interface TaskResponse {
+    code: number;
+    msg: string;
+    data: Task;
   }
 };
