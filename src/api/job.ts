@@ -19,8 +19,8 @@ const axiosInstance = createAxiosInstance(axiosConfig);
  * 获取 Job
  * @param data
  */
-export function fetchSimpleJob(data: string) {
-  return axiosInstance.post<API.TaskResponse>("/gis_agent_backend/simple/task_plan/", data, {
+export function fetchSimpleJob(data: API.JobRequest) {
+  return axiosInstance.post<API.JobResponse>("/gis_agent_backend/simple/task_plan/", data, {
     headers: {
       "Content-Type": "application/json",
     },

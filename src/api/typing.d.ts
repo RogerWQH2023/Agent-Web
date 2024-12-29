@@ -1,4 +1,5 @@
-import type { AgentType } from "@/types/index.d.ts";
+import type { AgentType, GISQAMessage, GISQAChatMessage, GISQAWorkflowMessage, OriTask } from "@/types/index.d.ts";
+import type { Task } from "@/type.ts";
 
 declare namespace API {
   // 历史记录查询返回体
@@ -49,29 +50,27 @@ declare namespace API {
     data: DialogData;
   }
 
-  interface GISQAChatMessage {
-    role: "user" | "assistant",
-    content: string
-  }
+
+
   interface GISQAChatRequest {
     type: string,
     model: string,
     messages: Array<GISQAChatMessage>
   }
+
   interface GISQAChatResponse {
     errcode: number,
     errmsg: string,
     messages: Array<GISQAChatMessage>
   }
-  interface Task {
-    task: string;
-    toolId: string;
-    toolName: string;
-    subtasks: Array<Task>;
-  }
-  interface TaskResponse {
+
+  interface JobResponse {
     code: number;
     msg: string;
-    data: Task;
+    data: OriTask;
+  }
+
+  interface JobRequest {
+    task: string;
   }
 };

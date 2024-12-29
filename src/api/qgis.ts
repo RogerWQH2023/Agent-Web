@@ -5,7 +5,7 @@
  */
 import { AxiosInstanceConfig, createAxiosInstance } from "@/api/axios.ts";
 
-const BASE_URL = "http://10.130.11.30:32580/";
+const BASE_URL = "http://10.130.11.30:8000";
 
 const axiosConfig: AxiosInstanceConfig = {
   baseURL: BASE_URL,

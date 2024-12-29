@@ -7,6 +7,7 @@ import { mockSearchDialogDataById, mockSearchHistoryList, mockSearchOptionalQues
 import type { AgentType } from '@/types/index.d.ts'
 import { API } from "./typing";
 import axios from "axios";
+import { generateId } from "@/utils/graphUtil";
 
 
 
@@ -66,17 +67,24 @@ export async function mockGetDialogDataById(dialogId: string) {
 }
 
 /* 新建对话的mock逻辑，将问题暂存在LocalStorage */
-export async function mockGetNewDialogId(type: AgentType, question: string) {
+export async function mockGetNewDialogId(type: AgentType, params: { [key: string]: any }, question: string) {
   // 添加1/4秒的读数据延迟
   await new Promise((resolve) => setTimeout(resolve, 250));
-  const message = {
-    type: "openai",
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: question }]
-  };
-  localStorage.setItem("tempType", type);
-  localStorage.setItem("tempMessage", JSON.stringify(message));
-  return "demo-id-zju24";
+  if (type === "chat") {
+    const message = {
+      ...params,
+      messages: [{ role: "user", content: question }]
+    };
+    localStorage.setItem("tempMessage", JSON.stringify(message));
+  }
+  else if (type === "workflow") {
+    const message = {
+      task: question
+    };
+    localStorage.setItem("tempMessage", JSON.stringify(message));
+  }
+
+  return generateId();
 }
 
 /* 新建对话的mock逻辑，发送问题，返回新的回答 */
