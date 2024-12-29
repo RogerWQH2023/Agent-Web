@@ -117,17 +117,21 @@ export const breakdownNode: ShapeOptions = {
     if (name === "hover") {
       if (value) {
         rectShape.attr({
-          fill: "green",
+          fill: "#f7b485",
+          r: 11,
         });
         textShape.attr({
-          fill: "green",
+          fill: "#e0620d",
+          fontSize: 13
         });
       } else {
         rectShape.attr({
-          fill: "#D7DCF1",
+          fill: "#f08d4a",
+          r: 10,
         });
         textShape.attr({
           fill: "#000",
+          fontSize: 12
         });
       }
     }
@@ -139,9 +143,9 @@ export const breakdownNode: ShapeOptions = {
         // x: -r / 2,
         // y: -r / 2,
         r,
-        stroke: "#5B8FF9",
-        fill: "#D7DCF1",
-        lineWidth: 2,
+        stroke: "#e0620d",
+        fill: "#f08d4a",
+        lineWidth: 3,
         cursor: "pointer",
       },
       name: "breakdown-node-key-shape",
@@ -156,6 +160,10 @@ export const breakdownNode: ShapeOptions = {
         textAlign: "left",
         textBaseline: "middle",
         cursor: "pointer",
+        fontWeight: 600,
+        shadowOffsetX: 5,
+        shadowOffsetY: 5,
+        shadowColor: '#00000010',
       },
       name: "breakdown-text-shape",
     });
@@ -172,21 +180,36 @@ export const workflowNode: ShapeOptions = {
   setState(name, value, item) {
     const group = item?.getContainer();
     const rectShape = group?.get("children")[0];
+    const imgShape = group?.get("children")[1];
     const textShape = group?.get("children")[2];
     if (name === "hover") {
       if (value) {
         rectShape.attr({
-          fill: "green",
+          fill: "#f7b485",
+          width: 26,
+          height: 26,
+        });
+        imgShape.attr({
+          width: 26,
+          height: 26,
         });
         textShape.attr({
-          fill: "green",
+          fill: "#e0620d",
+          fontSize: 13
         });
       } else {
         rectShape.attr({
-          fill: "#D7DCF1",
+          fill: "#f08d4a",
+          width: 24,
+          height: 24,
+        });
+        imgShape.attr({
+          width: 24,
+          height: 24,
         });
         textShape.attr({
           fill: "#000",
+          fontSize: 12
         });
       }
     }
@@ -200,9 +223,9 @@ export const workflowNode: ShapeOptions = {
         // x: -size / 2,
         // y: -size / 2,
         radius: 4,
-        stroke: "#5A77C1",
-        fill: "#D7DCF1",
-        lineWidth: 2,
+        stroke: "#e0620d",
+        fill: "#f08d4a",
+        lineWidth: 3,
         cursor: "pointer",
       },
       name: "workflow-node-key-shape",
@@ -213,7 +236,8 @@ export const workflowNode: ShapeOptions = {
         // y: -size / 2,
         width: size,
         height: size,
-        img: "https://i.imgur.com/O2p39SI.png",
+        // img: "https://i.imgur.com/O2p39SI.png",
+        img: "/Node.svg",
         cursor: "pointer",
       },
       name: "workflow-node-img-shape",
@@ -228,6 +252,10 @@ export const workflowNode: ShapeOptions = {
         textAlign: "left",
         textBaseline: "middle",
         cursor: "pointer",
+        fontWeight: 600,
+        shadowOffsetX: 5,
+        shadowOffsetY: 5,
+        shadowColor: '#00000010',
       },
       name: "workflow-node-text-shape",
     });
