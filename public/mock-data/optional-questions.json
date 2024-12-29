@@ -13,9 +13,9 @@
   },
   {
     "questionId": "workflow-001",
-    "title": "ArcGIS分析工具故障排除",
+    "title": "Elevation of Sri Lanka",
     "type": "workflow",
-    "content": "在使用ArcGIS进行北京城市规划项目时，分析工具突然不可用，应如何排查并解决这一问题？"
+    "content": "Extract elevation data of Sri Lanka from multiple TIF files using the shape of the island from a vector file."
   },
   {
     "questionId": "workflow-002",
