@@ -6,14 +6,13 @@ import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
 const playgroundStore = usePlaygroundStore()
-const { expand, type } = storeToRefs(playgroundStore);
+const { expand } = storeToRefs(playgroundStore);
 
 const shouldAnimate = ref(false); // 控制是否应用动画
 
 
 const changePlaygroundExpandStatus = () => {
   expand.value = !expand.value;
-  type.value = "none";
   //当第一次使用拓展按键后才需要播放动画
   shouldAnimate.value = true;
 }
