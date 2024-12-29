@@ -3,10 +3,10 @@
  * @Author: Chris
  * @Date: 2024/7/23
  */
-import {defineStore} from "pinia";
-import {FileNode, Response} from "@/type.ts";
-import {fetchWorkspace} from "@/api";
-import {computed, ref} from "vue";
+import { defineStore } from "pinia";
+import { FileNode, Response } from "@/type.ts";
+import { fetchWorkspace } from "@/api";
+import { computed, ref } from "vue";
 
 export const useWorkspaceStore = defineStore("workspace", () => {
   let root = ref<FileNode>();
@@ -16,7 +16,7 @@ export const useWorkspaceStore = defineStore("workspace", () => {
     root.value = res.data;
   }
 
-  const treeData = computed(() => root.value?.children);
+  const treeData = computed(() => root.value as unknown as FileNode[] || []);
 
-  return {treeData, updateData};
+  return { treeData, updateData };
 });

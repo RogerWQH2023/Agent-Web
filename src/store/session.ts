@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { generateId } from "@/utils/graphUtil";
 import { useJobStore } from "@/store/job.ts";
-import { useRouter } from "vue-router";
 
 type Session = {
   sessionId: string;
@@ -12,7 +11,6 @@ type Session = {
 
 export const useSessionStore = defineStore("session", () => {
   const jobStore = useJobStore();
-  const router = useRouter();
 
   const session = reactive<Session>({
     sessionId: generateId(),
