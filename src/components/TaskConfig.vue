@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {Close, Download} from "@element-plus/icons-vue";
-import {useTaskStore} from "@/store/task.ts";
-import {computed, ref} from "vue";
-import {downloadFile, process} from "@/api";
-import {ProcessResponse, Response} from "@/type.ts";
+import { Close, Download } from "@element-plus/icons-vue";
+import { useTaskStore } from "@/store/task.ts";
+import { computed, ref } from "vue";
+import { downloadFile, process } from "@/api";
+import { ProcessResponse, Response } from "@/type.ts";
 
 const taskStore = useTaskStore();
 
@@ -41,78 +41,59 @@ async function download() {
 }
 </script>
 <template>
-  <el-card
-    style="
+  <el-card style="
       position: absolute;
       bottom: 30px;
       right: 30px;
       width: 500px;
-      max-height: calc(100vh - 130px);
-      overflow-y: auto;
-    "
-    shadow="hover"
-  >
-    <el-button
-      :icon="Close"
-      text
-      style="position: absolute; top: 15px; right: 15px"
-      @click="taskStore.close()"
-    />
+      overflow: hidden;
+      border-radius: 15px;
+    " shadow="hover">
+    <div class="tool-title"> {{ taskStore.tool?.name }} </div>
 
-    <el-form label-position="top" style="margin: 20px">
-      <el-descriptions direction="vertical" :column="1">
-        <el-descriptions-item label="Tool name">
-          {{ taskStore.tool?.name }}
-        </el-descriptions-item>
-        <el-descriptions-item label="Tool description">
-          {{ taskStore.tool?.description }}
-        </el-descriptions-item>
-      </el-descriptions>
-      <el-form-item label="Args">
-        <el-table :data="tableData" header-cell-class-name="header-cell-class">
-          <el-table-column prop="name" label="Name" />
-          <el-table-column prop="description" label="Description" />
-          <el-table-column prop="input" label="Input">
-            <template #default="scope">
-              <el-input
-                v-model="scope.row.input"
-                style="height: 100%; width: 100%"
-                type="textarea"
-                autosize
-                placeholder="Please input"
-              />
+    <el-button :icon="Close" text style="position: absolute; top: 15px; right: 15px" @click="taskStore.close()" />
+
+    <div class="form-container">
+      <el-form label-position="top" style="margin: 20px">
+        <el-descriptions direction="vertical" :column="1">
+          <el-descriptions-item label="Tool name">
+            {{ taskStore.tool?.name }}
+          </el-descriptions-item>
+          <el-descriptions-item label="Tool description">
+            {{ taskStore.tool?.description }}
+          </el-descriptions-item>
+        </el-descriptions>
+        <el-form-item label="Args">
+          <el-table :data="tableData" header-cell-class-name="header-cell-class">
+            <el-table-column prop="name" label="Name" />
+            <el-table-column prop="description" label="Description" />
+            <el-table-column prop="input" label="Input">
+              <template #default="scope">
+                <el-input v-model="scope.row.input" style="height: 100%; width: 100%" type="textarea" autosize
+                  placeholder="Please input" />
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-form-item>
+        <el-descriptions v-if="res" direction="vertical" :column="1">
+          <el-descriptions-item>
+            <template #label>
+              Result
+              <el-button type="primary" :icon="Download" circle v-if="res.data?.OUTPUT" style="float: right"
+                @click="download()" />
             </template>
-          </el-table-column>
-        </el-table>
-      </el-form-item>
-      <el-descriptions v-if="res" direction="vertical" :column="1">
-        <el-descriptions-item>
-          <template #label>
-            Result
-            <el-button
-              type="primary"
-              :icon="Download"
-              circle
-              v-if="res.data?.OUTPUT"
-              style="float: right"
-              @click="download()"
-            />
-          </template>
-          {{ res?.message }}
-        </el-descriptions-item>
-      </el-descriptions>
+            {{ res?.message }}
+          </el-descriptions-item>
+        </el-descriptions>
 
-      <el-form-item>
-        <div style="width: 100%; display: flex; justify-content: space-between">
-          <el-button @click="onCancel">Cancel</el-button>
-          <el-button
-            type="primary"
-            @click="onExecute(taskStore.tool?.id, tableData)"
-            >Execute</el-button
-          >
-        </div>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <div style="width: 100%; display: flex; justify-content: space-between">
+            <el-button @click="onCancel">Cancel</el-button>
+            <el-button type="primary" @click="onExecute(taskStore.tool?.id, tableData)">Execute</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
+    </div>
   </el-card>
 </template>
 
@@ -120,6 +101,25 @@ async function download() {
 .header-cell-class {
   background-color: aqua;
   border-color: aqua;
+}
+
+.tool-title {
+  position: absolute;
+  top: 0.75rem;
+  left: 2.5rem;
+  background-color: white;
+  height: 2.5rem;
+  font-size: 1.0rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+.form-container {
+  margin: 0.5rem;
+  margin-top: 2.5rem;
+  max-height: calc(60vh);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 /deep/ .el-textarea__inner {

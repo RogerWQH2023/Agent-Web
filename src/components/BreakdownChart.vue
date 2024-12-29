@@ -39,10 +39,9 @@ const handleResize = () => {
 onMounted(() => {
   console.log("breakdown");
   // 获取容器元素
-  container.value = document.getElementById(getGraphNum());
-
+  //container.value = document.getElementById(getGraphNum());
   tree.value = new G6.TreeGraph({
-    container: getGraphNum(),
+    container: container.value!,
     animate: false,
     linkCenter: true,
     // 设置初始宽高

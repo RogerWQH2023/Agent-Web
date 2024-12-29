@@ -1,21 +1,20 @@
 <script lang="ts" setup>
-import Workflow from "@/pages/Workflow/index.vue"
-import { useSessionStore } from "@/store/session.ts";
+import WorkflowPlaygroundContent from "@/components/PlaygroundContent/WorkflowPlaygroundContent.vue"
+import DefaultPlaygroundContent from "@/components/PlaygroundContent/DefaultPlaygroundContent.vue"
+import { usePlaygroundStore } from "@/store/playground";
+import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
-const sessionStore = useSessionStore();
+const { type } = storeToRefs(usePlaygroundStore());
 
-/* onMounted(() => {
-  sessionStore.session.question =
-    "Extract elevation data of Sri Lanka from multiple TIF files using the shape of the island from a vector file.";
-  sessionStore.chatted();
-})  */
+onMounted(() => {
+}) 
 </script>
 
 <template>
   <div class="playground-box">
-    <!-- <Workflow /> -->
-
+    <DefaultPlaygroundContent v-if="type === 'none'" />
+    <WorkflowPlaygroundContent v-if="type === 'workflow'" />
   </div>
 
 </template>
@@ -29,6 +28,7 @@ const sessionStore = useSessionStore();
   background-color: white;
   border-radius: 0.9rem;
   overflow: hidden;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
 }
 </style>
