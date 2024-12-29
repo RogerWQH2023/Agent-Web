@@ -6,7 +6,7 @@ import { modeData } from "@/constant/modeData.ts"
 
 const props = defineProps<{
   type: AgentType,
-  inputOnClicked: (content: string) => Promise<void>
+  inputOnClicked: (params: { [key: string]: any }, content: string) => Promise<void>
 }>()
 const isSending = ref<boolean>(false);
 
@@ -20,7 +20,15 @@ const handleSend = async () => {
     const content = inputBox.value!.value;
     inputBox.value!.value = '';
     isSending.value = true;
-    await props.inputOnClicked(content);
+    /* 根据类型添加返回体变量 */
+    if (props.type === "chat") {
+      await props.inputOnClicked({
+        type: "openai",
+        model: "gpt-3.5-turbo",
+      }, content);
+    } else if (props.type === "workflow") {
+      await props.inputOnClicked({}, content);
+    }
     isSending.value = false;
   }
 };

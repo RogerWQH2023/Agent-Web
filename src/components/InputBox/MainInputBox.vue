@@ -19,9 +19,21 @@ const handleSend = async () => {
   if (isSending.value) { return; }
   if (inputBox.value && inputBox.value.value !== '') {
     isSending.value = true;
-    const dialogId = await mockGetNewDialogId(inputMode.value, inputBox.value.value);
-    isSending.value = false;
-    router.push(`/dialog/${inputMode.value}/${dialogId}`);
+    /* 根据类型添加返回体变量 */
+    if (inputMode.value === "chat") {
+      const dialogId = await mockGetNewDialogId(inputMode.value, {
+        type: "openai",
+        model: "gpt-3.5-turbo",
+      }, inputBox.value.value);
+      isSending.value = false;
+      router.push(`/dialog/${inputMode.value}/${dialogId}`);
+    } else if (inputMode.value === "workflow") {
+      const dialogId = await mockGetNewDialogId(inputMode.value, {}, inputBox.value.value);
+      isSending.value = false;
+      router.push(`/dialog/${inputMode.value}/${dialogId}`);
+    }
+
+
 
     //console.log("发送内容:", inputBox.value.value);
     // 清空输入框
