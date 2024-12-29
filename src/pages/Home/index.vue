@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { mockGetOptionalQuestions } from "@/api/chat"
-import MainInputBox from "@/components/MainInputBox/index.vue"
-import type { AgentType } from "@/types/index.d.ts"
-import QuestBubble from "./components/QuestBubble.vue"
-import type { API } from "@/api/typing.d.ts"
-import { usePlaygroundStore } from '@/store/playground';
-import { storeToRefs } from 'pinia';
+import { ref, onMounted } from "vue";
+import { mockGetOptionalQuestions } from "@/api/chat";
+import MainInputBox from "@/components/InputBox/MainInputBox.vue";
+import type { AgentType } from "@/types/index.d.ts";
+import QuestBubble from "./components/QuestBubble.vue";
+import type { API } from "@/api/typing.d.ts";
+import { usePlaygroundStore } from "@/store/playground";
+import { storeToRefs } from "pinia";
 
 const queryResult = ref<API.OptionalQuestionsResponse>();
 const InputBoxRef = ref<InstanceType<typeof MainInputBox> | null>();
 
-
 // 在组件加载时执行的操作
 onMounted(() => {
-  const playgroundStore = usePlaygroundStore()
-  const { expand, content } = storeToRefs(playgroundStore);
+  const playgroundStore = usePlaygroundStore();
+  const { expand, type } = storeToRefs(playgroundStore);
   expand.value = false;
+  type.value = "none";
   queryResult.value = undefined;
   updateOptionalQuestions();
 });
@@ -24,20 +24,19 @@ onMounted(() => {
 const updateOptionalQuestions = async () => {
   const response = await mockGetOptionalQuestions();
   queryResult.value = response;
-}
+};
 
 const setBoxContent = (mode: AgentType, content: string) => {
   if (InputBoxRef.value) {
     InputBoxRef.value.setContent(mode, content);
   }
-}
-
+};
 </script>
 
 <template>
   <div id="container">
-    <img class="title-icon" src="@/assets/icons/Logo-words.svg" alt="AI GIS STSTEM">
-    <MainInputBox class="inputbox" style="margin-bottom: 40px;" ref="InputBoxRef" />
+    <img class="title-icon" src="@/assets/icons/Logo-words.svg" alt="AI GIS STSTEM" />
+    <MainInputBox class="inputbox" style="margin-bottom: 40px" ref="InputBoxRef" />
     <div class="bubble-container">
       <QuestBubble v-if="queryResult !== undefined" v-for="item in queryResult.data" :key="item.questionId"
         :title="item.title" :type="item.type" @click="setBoxContent(item.type, item.content)" />
