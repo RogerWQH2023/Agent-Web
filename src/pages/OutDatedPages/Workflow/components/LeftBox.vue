@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import {useSessionStore} from "@/store/session.ts";
-import BreakdownChart from "@/components/BreakdownChart.vue";
+import {useSessionStore} from "@/store/OutDatedStore/session.ts";
+import BreakdownChart from "@/components/OutDatedComponents/BreakdownChart.vue";
 import Workspace from "@/components/Workspace.vue";
 
 const sessionStore = useSessionStore();

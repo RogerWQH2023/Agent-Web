@@ -29,7 +29,7 @@ const props = defineProps({
 <style lang="less" scoped>
 .card-container {
   width: calc(100% - 0.8rem);
-  height: 5rem;
+  height: 4.0rem;
   border-radius: 0.9rem;
   margin-top: 0.4rem;
   background-color: #ffffffb0;
@@ -53,9 +53,9 @@ const props = defineProps({
   }
 
   .mode-icon {
-    width: 2.3rem;
+    width: 1.8rem;
     margin: 0.7rem;
-    margin-right: 1rem;
+    margin-right: 0.7rem;
   }
 
   .word-container {
@@ -64,7 +64,7 @@ const props = defineProps({
     padding-left: 0;
 
     h3 {
-      font-size: 1rem;
+      font-size: 0.8rem;
       margin: 0;
       margin-bottom: 0.25rem;
       padding: 0;
@@ -74,7 +74,7 @@ const props = defineProps({
     p {
       margin: 0;
       padding: 0;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 

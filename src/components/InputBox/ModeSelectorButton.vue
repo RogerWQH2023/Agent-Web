@@ -115,7 +115,7 @@ const changeMode = (mode: AgentType) => {
   left: 0;
   bottom: 0;
   z-index: 2;
-  width: 18rem;
+  width: 16rem;
   border-radius: 0.9rem;
   background-color: #ffffff66;
   border: 2px solid #525252;

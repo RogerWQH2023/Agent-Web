@@ -3,7 +3,7 @@
 //   console.log("click");
 // }
 import { useRouter } from "vue-router";
-import { useSessionStore } from "@/store/session.ts";
+import { useSessionStore } from "@/store/OutDatedStore/session.ts";
 
 const router = useRouter();
 const sessionStore = useSessionStore();

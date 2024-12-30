@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive, ref } from "vue";
 import { generateId } from "@/utils/graphUtil";
-import { useJobStore } from "@/store/job.ts";
+import { useJobStore } from "@/store/OutDatedStore/job.ts";
 
 type Session = {
   sessionId: string;

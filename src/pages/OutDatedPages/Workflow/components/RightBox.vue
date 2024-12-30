@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import WorkflowChart from "@/components/WorkflowChart.vue";
+import WorkflowChart from "@/components/OutDatedComponents/WorkflowChart.vue";
 import TaskConfig from "@/components/TaskConfig.vue";
 import { useTaskStore } from "@/store/task.ts";
-import { useSessionStore } from "@/store/session.ts";
+import { useSessionStore } from "@/store/OutDatedStore/session.ts";
 
 const taskStore = useTaskStore();
 const sessionStore = useSessionStore();

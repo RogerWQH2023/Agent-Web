@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import G6 from "@antv/g6";
 import { onMounted, onUnmounted, ref } from "vue";
-import { useJobStore } from "@/store/job.ts";
+import { useJobStore } from "@/store/OutDatedStore/job.ts";
 import { IG6GraphEvent } from "@antv/g6-core/lib/types";
-import { useGraphStore } from "@/store/graph.ts";
+import { useGraphStore } from "@/store/OutDatedStore/graph.ts";
 import { storeToRefs } from "pinia";
 import { Task } from "@/type.ts";
 import { tooltip } from "@/G6/plugins.ts";

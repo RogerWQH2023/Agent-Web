@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Search, Top } from "@element-plus/icons-vue";
-import { useSessionStore } from "../store/session.ts";
+import { useSessionStore } from "@/store/OutDatedStore/session.ts";
 
 const sessionStore = useSessionStore();
 </script>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSessionStore } from "../store/session.ts";
+import { useSessionStore } from "@/store/OutDatedStore/session.ts";
 
 const sessionStore = useSessionStore();
 

@@ -6,10 +6,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import G6 from "@antv/g6";
-import { useJobStore } from "@/store/job.ts";
+import { useJobStore } from "@/store/OutDatedStore/job.ts";
 import { useTaskStore } from "@/store/task.ts";
 import { IG6GraphEvent } from "@antv/g6-core/lib/types";
-import { useGraphStore } from "@/store/graph.ts";
+import { useGraphStore } from "@/store/OutDatedStore/graph.ts";
 import { storeToRefs } from "pinia";
 import { Task } from "@/type.ts";
 
